@@ -13,49 +13,8 @@ import ChapItem from "../components/ChapItem"
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-export default class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            list: []
-        };
-       
-    }
+export default class ContentChap extends Component {
 
-    componentDidMount() {
-
-        // load in db
-        FileSystem.downloadAsync(
-            Asset.fromModule(require('../assets/db/db.mp4')).uri,
-            `${FileSystem.documentDirectory}SQLite/db.db`
-        )
-            .then(() => {
-                let dbbook = SQLite.openDatabase('db.db');
-
-                // do whatever else you need here
-                let test=[];
-                console.log(dbbook)
-                dbbook.transaction((tx) => {
-                    tx.executeSql('SELECT * FROM chaps', [], (tx, results) => {
-                        
-                        var len = results.rows.length;
-                        for (let i = 0; i < len; i++) {
-                            let row = results.rows.item(i);
-                            test.push({ stt: row.stt, chapName: row.chapName, isRead: row.isRead, content: row.content })
-                        }
-                        this.setState({
-                            list: test
-                        })
-                    });
-                });
-
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }
-
-   
     render() {
         const { navigation } = this.props;
         navigation.setOptions({
@@ -83,21 +42,7 @@ export default class Home extends Component {
 
             <SafeAreaView style={styles.container}>
                 <StatusBar barStyle="light-content" />
-                <FlatList
-                    style={styles.flatlist}
-                    data={this.state.list}
-                    renderItem={({ item }) => <ChapItem infoChap={item} onPress={() => navigation.toggleDrawer()}/>}
-                    keyExtractor={item => `${item.stt}`}
-                /> 
-
-                <View style={styles.bottom}>
-                    <TouchableOpacity >
-                        <View style={styles.btnNext}>
-                            <Text style={styles.btnText}>Đọc tiếp </Text>
-                            <Ionicons name="ios-arrow-dropright" style={styles.icon} />
-                        </View>
-                    </TouchableOpacity>
-                </View>
+                <Text>content</Text>
             </SafeAreaView>
         );
     }

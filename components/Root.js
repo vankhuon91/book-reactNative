@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import Home from '../pages/Home'
+import ContentChap from '../pages/ContentChap'
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,10 @@ export default class Root extends Component {
             <Stack.Screen
                 name="Home"
                 component={Home}
+            />
+            <Stack.Screen
+                name="ContentChap"
+                component={ContentChap}
             />
         </Stack.Navigator>
     )}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet,TouchableOpacity } from 'react-native'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class ChapItem extends Component {
@@ -7,15 +7,23 @@ export default class ChapItem extends Component {
 
     render() {
         const { infoChap } = this.props;
+        
         return (
-            <View style={styles.container}>
-                <View style={styles.viewtext}>
-                    <Text style={styles.text}> {infoChap.chapName}</Text>
+
+            <TouchableOpacity >
+                <View style={styles.container}>
+                    <View style={styles.viewtext}>
+                        <Text style={styles.text}> {infoChap.chapName}</Text>
+                    </View>
+                    <View >
+                        {infoChap.isRead != '' ?
+                            <Ionicons style={styles.checkIcon} name="md-checkmark-circle-outline" />
+                            :
+                            <Text></Text>
+                        }
+                    </View>
                 </View>
-                <View >
-                    <Ionicons style={styles.checkIcon} name="md-checkmark-circle-outline" />
-                </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }
@@ -35,8 +43,8 @@ const styles = StyleSheet.create({
         alignItems: "stretch",
     },
     checkIcon: {
-        color:"#62a0c3",
-        fontSize:26,
+        color: "#62a0c3",
+        fontSize: 26,
         width: 30,
         justifyContent: "center",
     },
